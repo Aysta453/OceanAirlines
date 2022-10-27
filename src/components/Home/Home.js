@@ -5,10 +5,11 @@ import { Link, useNavigate } from "react-router-dom";
 import React, { useState } from "react";
 import { getReduxUser } from "../../utils/Common";
 import Controls from "../Controls/Controls";
+import { systemWhite, secondary, systemBlack, primaryButton, secondaryButton } from "../../constants/colors";
 
 const useStyles = makeStyles((theme) => ({
   root: {
-    backgroundColor: '#F8C8DC',
+    backgroundColor: secondary,
     height: "100%",
   },
   mid: {
@@ -21,18 +22,27 @@ const useStyles = makeStyles((theme) => ({
   },
   typoname: {
     fontSize: "100px",
-    fontWeight: "600",
+    marginTop: theme.spacing(10),
+    fontWeight: "400",
     textAlign: "center",
-    color: "#fff",
+    color: systemWhite,
   },
   btn: {
-    width: "442px",
-    height: "106px",
+    borderSize: '20px',
+    borderStyle: 'solid',
+    borderColor: systemBlack,
     marginTop: theme.spacing(10),
-    color: "#fff",
+    backgroundColor: primaryButton,
+    paddingLeft: '60px',
+    paddingRight: '60px',
+    color: systemWhite,
+    borderRadius: '25px',
     fontSize: "25px",
     '&:hover': {
-      backgroundColor: "#43b4d9"
+      backgroundColor: secondaryButton,
+      borderColor: systemBlack,
+      borderStyle: 'solid',
+      borderSize: '1px',
     }
   },
   link: {
@@ -58,6 +68,7 @@ function Home() {
             className={classes.btn}
             type="submit"
             text="Get Started"
+            variant="outlined"
           />
         </Link>
       </div>
