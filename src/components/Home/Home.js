@@ -9,13 +9,15 @@ import Controls from "../Controls/Controls";
 const useStyles = makeStyles((theme) => ({
   root: {
     backgroundColor: '#F8C8DC',
-    height: "60vh",
+    height: "100%",
   },
   mid: {
     display: "flex",
     flexDirection: "column",
     alignItem: "center",
-    justifyContent: "center"
+    justifyContent: "center",
+    paddingBottom: theme.spacing(10),
+    paddingTop: theme.spacing(10),
   },
   typoname: {
     fontSize: "100px",
@@ -28,6 +30,7 @@ const useStyles = makeStyles((theme) => ({
     height: "106px",
     marginTop: theme.spacing(10),
     color: "#fff",
+    fontSize: "25px",
     '&:hover': {
       backgroundColor: "#43b4d9"
     }
@@ -50,7 +53,7 @@ function Home() {
           color="secondary"
           className={classes.typoname}
         >Oceanic World Airlines</Typography>
-        <Link to="/homepage" className={classes.link}>
+        <Link to="/startbooking" className={classes.link}>
           <Controls.Button
             className={classes.btn}
             type="submit"

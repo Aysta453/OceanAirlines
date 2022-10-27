@@ -40,7 +40,6 @@ function PrivateRoute({ component: Component, ...rest }) {
     //   if (!account || !currentUser) {
     //     handleLogout()
     //   }
-    console.log(isAuth);
     return isAuth ? (
         <>
             <Header />

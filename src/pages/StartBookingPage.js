@@ -1,19 +1,44 @@
+import { makeStyles } from '@material-ui/core';
 import React from 'react';
+import { Link } from 'react-router-dom';
+import Controls from '../components/Controls/Controls';
 
 const useStyles = makeStyles((theme) => ({
     root: {
-      backgroundColor: "#FF87BA",
-      height: "107px",
-      zIndex: theme.zIndex.drawer + 1,
+        height: "100vh",
+        display: 'flex',
+        justifyContent: 'center',
+        alignItems: 'center',
+        backgroundColor: "#fff"
     },
-  }));
+    btn: {
+        width: "442px",
+        height: "106px",
+        color: "#fff",
+        fontSize: "25px",
+        '&:hover': {
+            backgroundColor: "#43b4d9"
+        }
+    },
+    link: {
+        marginLeft: 'auto',
+        marginRight: 'auto',
+        textDecoration: 'none'
+    }
+}));
 
-function StartBookingPage(props) {
+function StartBookingPage() {
     const classes = useStyles();
-    
+
     return (
-        <div>
-            
+        <div className={classes.root}>
+            <Link to="/booking" className={classes.link}>
+                <Controls.Button
+                    className={classes.btn}
+                    type="submit"
+                    text="Start booking"
+                />
+            </Link>
         </div>
     );
 }

@@ -3,6 +3,8 @@ import { Routes, Route } from "react-router-dom";
 import HomePage from "./pages/HomePage"
 import { createTheme, ThemeProvider } from "@material-ui/core";
 import PrivateRoute from "./components/PrivateRoute/PrivateRoute";
+import StartBookingPage from "./pages/StartBookingPage";
+import FormPage from "./pages/FormPage";
 
 const theme = createTheme({
   palette: {
@@ -28,7 +30,9 @@ function App() {
       <ThemeProvider theme={theme}>
         <Routes>
           <Route exact path="/" element={<PrivateRoute />}>
-            <Route path="/" element={<HomePage />} />
+            <Route exact path="/" element={<HomePage />} />
+            <Route exact path="/startbooking" element={<StartBookingPage />} />
+            <Route exact path="/booking" element={<FormPage />} />
           </Route>
           <Route exact path="/*" element={<HomePage />} />
           {/* <Route exact path="/" element={<PrivateRoute />}>
