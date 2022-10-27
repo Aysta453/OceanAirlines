@@ -11,6 +11,7 @@ import {
     root: {
       backgroundColor: "#FF87BA",
       height: "107px",
+      zIndex: theme.zIndex.drawer + 1,
     },
   }));
   

@@ -9,7 +9,8 @@ import Header from "../Header/Header";
 
 const useStyles = makeStyles((theme) => ({
     root: {
-        background: "#888888"
+        background: "#888888",
+        marginTop: "107px"
     },
     content: {
         flexGrow: 1,
@@ -20,9 +21,9 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 const useAuth = () => {
-    const user = {loggedIn: true};
+    const user = { loggedIn: true };
     return user && user.loggedIn;
-  }
+}
 
 function PrivateRoute({ component: Component, ...rest }) {
     const isAuth = useAuth();
