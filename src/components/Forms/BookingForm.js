@@ -1,4 +1,4 @@
-import { Box, Grid, makeStyles, Typography } from "@material-ui/core";
+import { Box, CircularProgress, Grid, makeStyles, Typography } from "@material-ui/core";
 import React, { useState } from "react";
 import Controls from "../Controls/Controls";
 import { Form, useForm } from "./useForm";
@@ -6,7 +6,7 @@ import { Form, useForm } from "./useForm";
 const useStyles = makeStyles((theme) => ({
     root: {
         backgroundColor: "#ffffff",
-        width: "500px",
+        width: "550px",
         paddingTop: theme.spacing(10),
         borderRadius: "30px",
     },
@@ -28,7 +28,12 @@ const useStyles = makeStyles((theme) => ({
     typotitle: {
         textAlign: "center",
         fontSize: "30px",
-        fontWeight: "600",
+        marginBottom: theme.spacing(5),
+    },
+    typotitle2: {
+        textAlign: "center",
+        fontSize: "25px",
+        marginTop: theme.spacing(1),
         marginBottom: theme.spacing(2),
     },
     typosubtitle: {
@@ -41,6 +46,7 @@ const useStyles = makeStyles((theme) => ({
         width: "100%",
         marginTop: theme.spacing(1),
         marginBottom: theme.spacing(5),
+        color: "#fff",
         "&:hover": {
             backgroundColor: theme.palette.primary.dark,
         },
@@ -62,19 +68,16 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 const initialFValues = {
-    firstName: "",
-    lastName: "",
-    email: "",
-    password: "",
-    repeatPassword: "",
-    gender: "male",
-    dob: new Date(),
+    departure: "",
+    arrival: "",
+    weight: "",
+    width: 0,
+    length: 0,
+    height: 0,
+    weapons: false,
+    caution: false,
+    refrigerated: false
 };
-
-const genderItems = [
-    { id: "male", title: "Male" },
-    { id: "female", title: "Female" },
-];
 
 const cities = [
     { id: 0, title: "Tanger" },
@@ -85,6 +88,37 @@ const cities = [
 
 function BookingForm() {
     const classes = useStyles();
+    const [error, setError] = useState({
+        open: false,
+        text: "",
+    });
+    const { values, setValues, errors, setErrors, handleInputChange } =
+        useForm(initialFValues);
+
+    const validate = () => {
+        let temp = {};
+        temp.weight =
+            values.weight !== 0
+                ? ""
+                : "Weight can not be 0 or less!";
+        temp.width =
+            values.width !== 0
+                ? ""
+                : "Width can not be 0 or less!";
+        temp.length =
+            values.length >= 0
+                ? ""
+                : "Length can not be 0 or less!";
+        temp.height =
+            values.height >= 0
+                ? ""
+                : "Height can not be 0 or less!";
+        setErrors({
+            ...temp,
+        });
+        return Object.values(temp).every((x) => x === "");
+    };
+
 
     const handleSubmit = async (e) => {
         e.preventDefault();
@@ -93,7 +127,15 @@ function BookingForm() {
     return (
         <Form onSubmit={handleSubmit}>
             <Box className={classes.root}>
-                <Grid container spacing={1}>
+                <Grid container spacing={2}>
+                    <Grid item xs={12}>
+                        <Typography
+                            variant="h1"
+                            component="h1"
+                            color="secondary"
+                            className={classes.typotitle}
+                        >Package Information</Typography>
+                    </Grid>
                     <Grid item xs={6}>
                         <Typography
                             variant="h1"
@@ -104,6 +146,7 @@ function BookingForm() {
                         <Controls.Select
                             name="departure"
                             style={{ width: "100%" }}
+                            value={values.departure}
                             options={cities}
                         />
                     </Grid>
@@ -117,8 +160,17 @@ function BookingForm() {
                         <Controls.Select
                             name="departure"
                             style={{ width: "100%" }}
+                            value={values.arrival}
                             options={cities}
                         />
+                    </Grid>
+                    <Grid item xs={12}>
+                        <Typography
+                            variant="h1"
+                            component="h1"
+                            color="secondary"
+                            className={classes.typotitle2}
+                        >Dimension</Typography>
                     </Grid>
                     <Grid item xs={4}>
                         <Typography
@@ -129,7 +181,10 @@ function BookingForm() {
                         >Width</Typography>
                         <Controls.Input
                             name="width"
+                            type="number"
                             label="mm"
+                            value={values.width}
+                            InputLabelProps={{ shrink: true }}  
                         />
                     </Grid>
                     <Grid item xs={4}>
@@ -141,7 +196,10 @@ function BookingForm() {
                         >Lenght</Typography>
                         <Controls.Input
                             name="length"
+                            type="number"
                             label="mm"
+                            value={values.length}
+                            InputLabelProps={{ shrink: true }}  
                         />
                     </Grid>
                     <Grid item xs={4}>
@@ -153,21 +211,69 @@ function BookingForm() {
                         >Height</Typography>
                         <Controls.Input
                             name="height"
+                            type="number"
                             label="mm"
+                            value={values.height}
+                            InputLabelProps={{ shrink: true }}  
+                        />
+                    </Grid>
+                    <Grid item xs={12}>
+                        <Typography
+                            variant="h1"
+                            component="h1"
+                            color="secondary"
+                            className={classes.typosubtitle}
+                        >Weight</Typography>
+                        <Controls.Input
+                            name="weight"
+                            type="number"
+                            label="kg"
+                            value={values.weight}
+                            InputLabelProps={{ shrink: true }}  
+                        />
+                    </Grid>
+                    <Grid item xs={4}>
+                        <Controls.Checkbox
+                            name="weapons"
+                            label="Weapons"
+                            value={values.weapons}
+                        />
+                    </Grid>
+                    <Grid item xs={4}>
+                        <Controls.Checkbox
+                            name="caution"
+                            label="Caution Parcels"
+                            value={values.caution}
+                        />
+                    </Grid>
+                    <Grid item xs={4}>
+                        <Controls.Checkbox
+                            name="refigerated"
+                            label="Refigerated goods"
+                            value={values.refrigerated}
                         />
                     </Grid>
                     <Grid item xs={6}>
-                        <Controls.RadioGroup
-                            name="gender"
-                            items={genderItems}
+                        <Controls.Button
+                            className={classes.btn}
+                            type="submit"
+                            text="Back"
                         />
                     </Grid>
                     <Grid item xs={6}>
-                        <Controls.DatePicker
-                            name="dob"
-                            label="Birthday"
-                            maxDate={new Date()}
-                        />
+                        {false ? (
+                            <Controls.Button
+                                className={classes.btn}
+                                type="submit"
+                                text={<CircularProgress className={classes.loading} />}
+                            />
+                        ) : (
+                            <Controls.Button
+                                className={classes.btn}
+                                type="submit"
+                                text="Proceed"
+                            />
+                        )}
                     </Grid>
                 </Grid>
             </Box>
