@@ -1,23 +1,34 @@
 import { makeStyles } from '@material-ui/core';
 import React from 'react';
 import { Link } from 'react-router-dom';
+
 import Controls from '../components/Controls/Controls';
+import { primaryButton, secondaryButton, systemBlack, systemWhite } from '../constants/colors'
 
 const useStyles = makeStyles((theme) => ({
     root: {
-        height: "100vh",
+        pading: 'auto',
         display: 'flex',
         justifyContent: 'center',
         alignItems: 'center',
         backgroundColor: "#fff"
     },
     btn: {
-        width: "442px",
-        height: "106px",
-        color: "#fff",
+        borderSize: '20px',
+        borderStyle: 'solid',
+        borderColor: systemBlack,
+        marginTop: theme.spacing(45),
+        backgroundColor: primaryButton,
+        paddingLeft: '60px',
+        paddingRight: '60px',
+        color: systemWhite,
+        borderRadius: '25px',
         fontSize: "25px",
         '&:hover': {
-            backgroundColor: "#43b4d9"
+            backgroundColor: secondaryButton,
+            borderColor: systemBlack,
+            borderStyle: 'solid',
+            borderSize: '1px',
         }
     },
     link: {
