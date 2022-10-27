@@ -5,21 +5,21 @@ import { createTheme, ThemeProvider } from "@material-ui/core";
 import PrivateRoute from "./components/PrivateRoute/PrivateRoute";
 
 const theme = createTheme({
-  // palette: {
-  //   primary: {
-  //     main: "#377dff",
-  //     dark: "#185cdb",
-  //     light: "#ffffff",
-  //   },
-  //   secondary: {
-  //     main: "#4e5d78",
-  //     dark: "#cfd5e3",
-  //     light: "#f0f2f5",
-  //   },
-  // },
-  // typography: {
-  //   fontFamily: "'Lato', sans-serif",
-  // },
+  palette: {
+    primary: {
+      main: "#43b4d9",
+      dark: "#185cdb",
+      light: "#ffffff",
+    },
+    secondary: {
+      main: "#4e5d78",
+      dark: "#cfd5e3",
+      light: "#f0f2f5",
+    },
+  },
+  typography: {
+    fontFamily: "'Lato', sans-serif",
+  },
 })
 
 function App() {
