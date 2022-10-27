@@ -14,7 +14,6 @@ export default function Select(props) {
     <FormControl variant="outlined" {...(error && { error: true })} {...other}>
       <InputLabel>{label}</InputLabel>
       <MuiSelect label={label} name={name} value={value} onChange={onChange}>
-        <MenuItem value="">None</MenuItem>
         {options?.map((items, index) => (
           <MenuItem key={items.id} value={items.id}>
             {items.title}

@@ -1,9 +1,5 @@
-import {
-    KeyboardDatePicker,
-    MuiPickersUtilsProvider,
-  } from "@material-ui/pickers";
-  import DateFnsUtils from "@date-io/date-fns";
-  import React from "react";
+import React from "react";
+import { FormControl, FormControlLabel, Checkbox as MuiCheckbox } from "@material-ui/core";
   
   function Checkbox(props) {
     const { name, label, value, onChange, ...other } = props;
@@ -16,19 +12,17 @@ import {
     });
   
     return (
-      <MuiPickersUtilsProvider utils={DateFnsUtils}>
-        <KeyboardDatePicker
-          disableToolbar
-          variant="inline"
-          inputVariant="outlined"
-          label={label}
-          format="dd/MM/yyyy"
-          name={name}
-          value={value}
-          {...other}
-          onChange={(date) => onChange(convertToDefEventPara(name, date))}
+      <FormControl>
+        <FormControlLabel 
+            control={<MuiCheckbox
+                name={name}
+                color="primary"
+                checked={value}
+                onChange={e => onChange(convertToDefEventPara(name, e.target.checked))}
+                />}
+            label={label}
         />
-      </MuiPickersUtilsProvider>
+      </FormControl>
     );
   }
   
